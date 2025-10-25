@@ -1,0 +1,117 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    font-family: 'Roboto', system-ui, sans-serif;
+    background: linear-gradient(135deg, #f5f7fa 0%, #ffffff 100%);
+    color: #212121;
+  }
+}
+
+@layer components {
+  .gradient-text {
+    @apply bg-gradient-to-r from-primary-600 to-accent-600 bg-clip-text text-transparent;
+  }
+  
+  .gradient-bg {
+    @apply bg-gradient-to-br from-primary-500 via-accent-500 to-secondary-500;
+  }
+  
+  .material-card {
+    @apply bg-white rounded-material shadow-material hover:shadow-material-lg transition-all duration-300;
+  }
+  
+  .material-card-elevated {
+    @apply bg-white rounded-material-lg shadow-material-lg hover:shadow-material-xl transition-all duration-300 hover:-translate-y-1;
+  }
+  
+  .material-button {
+    @apply px-6 py-3 rounded-full font-medium transition-all duration-300 shadow-material hover:shadow-material-lg;
+  }
+  
+  .material-button-primary {
+    @apply material-button bg-gradient-to-r from-primary-500 to-primary-600 text-white hover:from-primary-600 hover:to-primary-700;
+  }
+  
+  .material-button-secondary {
+    @apply material-button bg-gradient-to-r from-accent-500 to-accent-600 text-white hover:from-accent-600 hover:to-accent-700;
+  }
+  
+  .material-button-outline {
+    @apply material-button bg-white text-primary-600 border-2 border-primary-500 hover:bg-primary-50;
+  }
+  
+  .section-container {
+    @apply max-w-7xl mx-auto px-6 py-20;
+  }
+  
+  .floating-icon {
+    @apply transform transition-all duration-300 hover:scale-110 hover:-translate-y-2;
+  }
+  
+  .chip {
+    @apply inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-gradient-to-r from-primary-50 to-accent-50 text-primary-700 border border-primary-200;
+  }
+  
+  .surface {
+    @apply bg-white rounded-material-lg shadow-material p-6;
+  }
+  
+  .surface-elevated {
+    @apply bg-white rounded-material-lg shadow-material-lg p-8;
+  }
+}
+
+@layer utilities {
+  /* Custom cursor styling for TypeAnimation */
+  :global(.react-type-animation-cursor) {
+    @apply text-primary-600 font-bold;
+    animation: blink 1s step-end infinite;
+  }
+  
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+  
+  /* Ticker Tape Animation */
+  .ticker-wrapper {
+    width: 100%;
+    overflow: hidden;
+  }
+  
+  .ticker-content {
+    display: flex;
+    animation: ticker 30s linear infinite;
+    width: fit-content;
+  }
+  
+  .ticker-item {
+    display: inline-block;
+    padding: 0 3rem;
+    white-space: nowrap;
+    font-weight: 600;
+    font-size: 0.95rem;
+  }
+  
+  @keyframes ticker {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+  
+  .ticker-content:hover {
+    animation-play-state: paused;
+  }
+}
