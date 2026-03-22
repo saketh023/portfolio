@@ -1,5 +1,42 @@
-import { motion } from "motion/react";
+import { useRef } from "react";
+import { motion, useScroll, useTransform, useSpring } from "motion/react";
 import { Experience, Project, Skill } from "./types";
+
+// Top-view F1 car SVG component
+function F1CarIcon() {
+  return (
+    <svg width="28" height="56" viewBox="0 0 28 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+      {/* Front wing */}
+      <rect x="4" y="1" width="20" height="4" rx="1" fill="#E8112D" />
+      {/* Front nose */}
+      <rect x="10" y="4" width="8" height="6" rx="1" fill="#E8112D" />
+      {/* Main body */}
+      <rect x="8" y="9" width="12" height="28" rx="3" fill="#E8112D" />
+      {/* Cockpit */}
+      <rect x="11" y="14" width="6" height="10" rx="2" fill="#0f172a" />
+      {/* Engine cover */}
+      <rect x="10" y="25" width="8" height="8" rx="2" fill="#c00f25" />
+      {/* Rear wing */}
+      <rect x="3" y="42" width="22" height="4" rx="1" fill="#E8112D" />
+      {/* Rear body */}
+      <rect x="9" y="37" width="10" height="7" rx="1" fill="#E8112D" />
+      {/* Front-left tyre */}
+      <rect x="1" y="8" width="6" height="9" rx="2" fill="#1e293b" />
+      <rect x="2" y="9" width="4" height="7" rx="1" fill="#334155" />
+      {/* Front-right tyre */}
+      <rect x="21" y="8" width="6" height="9" rx="2" fill="#1e293b" />
+      <rect x="22" y="9" width="4" height="7" rx="1" fill="#334155" />
+      {/* Rear-left tyre */}
+      <rect x="0" y="29" width="7" height="11" rx="2" fill="#1e293b" />
+      <rect x="1" y="30" width="5" height="9" rx="1" fill="#334155" />
+      {/* Rear-right tyre */}
+      <rect x="21" y="29" width="7" height="11" rx="2" fill="#1e293b" />
+      <rect x="22" y="30" width="5" height="9" rx="1" fill="#334155" />
+      {/* Halo */}
+      <rect x="12" y="14" width="4" height="2" rx="1" fill="#E8112D" />
+    </svg>
+  );
+}
 
 const skills: Skill[] = [
   {
@@ -36,15 +73,15 @@ const experiences: Experience[] = [
   {
     id: "1",
     role: "Software Engineer Intern",
-    team: "NYC ADministration for children's services (NYc children)",
+    team: "NYC Administration for Children's Services",
     period: "Jun 2025 - Aug 2025",
     description: "Reduced WCAG violations by 90% for 1,000+ municipal employees. Improved API response times by 30% across 3 Spring Boot microservices using Redis caching. Shortened production release cycle by 40% with Docker-based containerization.",
     active: true
   },
   {
     id: "2",
-    role: "graduate research assistant",
-    team: "stony brook university",
+    role: "Graduate Research Assistant",
+    team: "Stony Brook University",
     period: "Jan 2025 - May 2025",
     description: "Eliminated SQL throughput bottlenecks for 720,000 geometries using GPU-accelerated spatial data pipelines (cuSpatial, cuDF). Achieved 600x performance gain in spatial proximity queries and cut preprocessing time by 50%."
   },
@@ -95,6 +132,70 @@ const projects: Project[] = [
     githubUrl: "https://github.com/saikiranreddy2710/hackathon"
   }
 ];
+
+function RacingHistorySection({ experiences }: { experiences: Experience[] }) {
+  const sectionRef = useRef<HTMLElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start center", "end center"],
+  });
+
+  const y = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+  const smoothY = useSpring(y, { stiffness: 80, damping: 20 });
+
+  return (
+    <section id="racinghistory" ref={sectionRef} className="py-24 px-6 max-w-7xl mx-auto">
+      <div className="flex items-center gap-4 mb-12">
+        <span className="material-symbols-outlined text-primary text-3xl">history</span>
+        <h2 className="text-2xl font-bold uppercase tracking-widest">Racing History</h2>
+        <div className="flex-1 h-px bg-primary/20" />
+      </div>
+
+      <div className="relative">
+        {/* Animated F1 car riding the timeline */}
+        <motion.div
+          className="absolute -left-[14px] z-10 pointer-events-none drop-shadow-[0_0_8px_rgba(232,17,45,0.7)]"
+          style={{ top: smoothY }}
+        >
+          <F1CarIcon />
+        </motion.div>
+
+        <div className="space-y-12">
+          {experiences.map((exp, idx) => (
+            <motion.div
+              key={exp.id}
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ delay: idx * 0.1 }}
+              viewport={{ once: true }}
+              className="relative pl-12 border-l-2 border-primary/30"
+            >
+              <div className={`absolute -left-[9px] top-0 w-4 h-4 rounded-full ${exp.active ? 'bg-primary' : 'bg-primary/30'}`} />
+              <div className="bg-primary/5 border border-primary/10 rounded-xl p-8 hover:border-primary/30 transition-all">
+                <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-4 mb-6">
+                  <div>
+                    <h3 className="text-2xl font-bold uppercase tracking-tight mb-2">{exp.team}</h3>
+                    <p className="text-slate-400 font-bold uppercase tracking-widest flex items-center gap-2">
+                      <span className="material-symbols-outlined text-sm">engineering</span>
+                      {exp.role}
+                    </p>
+                  </div>
+                  <span className="bg-accent-yellow/10 text-accent-yellow px-4 py-1 rounded-full font-bold text-sm tracking-widest">
+                    {exp.period}
+                  </span>
+                </div>
+                <p className="text-slate-300 leading-relaxed text-lg">
+                  {exp.description}
+                </p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
 
 export default function App() {
   return (
@@ -232,45 +333,7 @@ export default function App() {
         </section>
 
         {/* Racing History */}
-        <section id="racinghistory" className="py-24 px-6 max-w-7xl mx-auto">
-          <div className="flex items-center gap-4 mb-12">
-            <span className="material-symbols-outlined text-primary text-3xl">history</span>
-            <h2 className="text-2xl font-bold uppercase tracking-widest">Racing History</h2>
-            <div className="flex-1 h-px bg-primary/20" />
-          </div>
-
-          <div className="space-y-12">
-            {experiences.map((exp, idx) => (
-              <motion.div
-                key={exp.id}
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ delay: idx * 0.1 }}
-                viewport={{ once: true }}
-                className="relative pl-12 border-l-2 border-primary/30"
-              >
-                <div className={`absolute -left-[9px] top-0 w-4 h-4 rounded-full ${exp.active ? 'bg-primary' : 'bg-primary/30'}`} />
-                <div className="bg-primary/5 border border-primary/10 rounded-xl p-8 hover:border-primary/30 transition-all">
-                  <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-4 mb-6">
-                    <div>
-                      <h3 className="text-2xl font-bold uppercase tracking-tight mb-2">{exp.team}</h3>
-                      <p className="text-slate-400 font-bold uppercase tracking-widest flex items-center gap-2">
-                        <span className="material-symbols-outlined text-sm">engineering</span>
-                        {exp.role}
-                      </p>
-                    </div>
-                    <span className="bg-accent-yellow/10 text-accent-yellow px-4 py-1 rounded-full font-bold text-sm tracking-widest">
-                      {exp.period}
-                    </span>
-                  </div>
-                  <p className="text-slate-300 leading-relaxed text-lg">
-                    {exp.description}
-                  </p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </section>
+        <RacingHistorySection experiences={experiences} />
 
         {/* The Academy */}
         <section id="theacademy" className="py-24 px-6 max-w-7xl mx-auto">
@@ -309,7 +372,7 @@ export default function App() {
                     Training Data
                   </p>
                   <p className="text-slate-300 mb-6 font-medium">
-                    Distributed Systems, Database Systems, Recent Advances in AI/ML, Data Science, Data Structures & Algorithms, Operating Systems, Computer Networks.
+                    Distributed Systems, Database Systems, Recent Advances in AI/ML, Data Science, Data Structures &amp; Algorithms, Operating Systems, Computer Networks.
                   </p>
                   <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded font-bold">
                     <span className="material-symbols-outlined text-sm">military_tech</span>
