@@ -1,106 +1,20 @@
-# Portfolio Website
+<div align="center">
+<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
+</div>
 
-A modern, responsive portfolio website built with React, TypeScript, and Tailwind CSS. This portfolio showcases the work and skills of a Computer Science graduate student at Stony Brook University.
+# Run and deploy your AI Studio app
 
-## Features
+This contains everything you need to run your app locally.
 
-- **Modern Design**: Sleek, professional UI with smooth animations
-- **Responsive**: Fully responsive design that works on all devices
-- **Interactive**: Smooth scrolling navigation and hover effects
-- **Performance**: Optimized for fast loading and smooth interactions
-- **Accessibility**: Built with accessibility best practices
+View your app in AI Studio: https://ai.studio/apps/2a66bc90-6f93-4941-a412-d8fac38e2b31
 
-## Tech Stack
+## Run Locally
 
-- **Frontend**: React 18 with TypeScript
-- **Styling**: Tailwind CSS with custom design system
-- **Animations**: Framer Motion for smooth animations
-- **Icons**: React Icons for consistent iconography
-- **Build Tool**: Create React App
+**Prerequisites:**  Node.js
 
-## Sections
 
-- **Hero**: Introduction and call-to-action
-- **About**: Personal background and current focus
-- **Skills**: Technical skills with progress indicators
-- **Projects**: Featured projects with descriptions and links
-- **Education**: Academic background and achievements
-- **Contact**: Contact form and social links
-
-## Getting Started
-
-### Prerequisites
-
-- Node.js (version 14 or higher)
-- npm or yarn
-
-### Installation
-
-1. Clone the repository:
-```bash
-git clone <repository-url>
-cd portfolio-website
-```
-
-2. Install dependencies:
-```bash
-npm install
-```
-
-3. Start the development server:
-```bash
-npm start
-```
-
-4. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-### Building for Production
-
-```bash
-npm run build
-```
-
-This builds the app for production to the `build` folder.
-
-## Customization
-
-### Personal Information
-
-Update the following files with your personal information:
-
-- `src/components/Hero.tsx` - Update name and introduction
-- `src/components/About.tsx` - Update background and focus areas
-- `src/components/Projects.tsx` - Add your projects
-- `src/components/Education.tsx` - Update education details
-- `src/components/Contact.tsx` - Update contact information
-
-### Styling
-
-The design system is built with Tailwind CSS and can be customized in:
-
-- `tailwind.config.js` - Color scheme and design tokens
-- `src/index.css` - Global styles and custom components
-
-### Colors
-
-The current color scheme uses:
-- Primary: Blue gradient (#0ea5e9 to #0369a1)
-- Background: Dark theme (#0f172a to #1e293b)
-- Text: White and gray variations
-
-## Deployment
-
-This project can be deployed to any static hosting service:
-
-- **Netlify**: Connect your GitHub repository
-- **Vercel**: Deploy with zero configuration
-- **GitHub Pages**: Use the build folder
-- **AWS S3**: Upload the build folder
-
-## License
-
-This project is open source and available under the [MIT License](LICENSE).
-
-## Contact
-
-For questions or collaboration opportunities, please reach out through the contact form on the website.
+1. Install dependencies:
+   `npm install`
+2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
+3. Run the app:
+   `npm run dev`
