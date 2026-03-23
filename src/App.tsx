@@ -1,6 +1,45 @@
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import { motion, useScroll, useTransform, useSpring } from "motion/react";
 import { Experience, Project, Skill } from "./types";
+
+// Vanta.js NET animated background
+function VantaBackground() {
+  const vantaRef = useRef<HTMLDivElement>(null);
+  const vantaEffect = useRef<any>(null);
+
+  useEffect(() => {
+    const win = window as any;
+    if (vantaRef.current && win.VANTA) {
+      vantaEffect.current = win.VANTA.NET({
+        el: vantaRef.current,
+        THREE: win.THREE,
+        mouseControls: true,
+        touchControls: true,
+        gyroControls: false,
+        minHeight: 200.0,
+        minWidth: 200.0,
+        scale: 1.0,
+        scaleMobile: 1.0,
+        color: 0xe8112d,          // primary red — matches brand
+        backgroundColor: 0x0f172a, // background-dark
+        points: 10,
+        maxDistance: 22,
+        spacing: 18,
+        showDots: true,
+      });
+    }
+    return () => {
+      if (vantaEffect.current) vantaEffect.current.destroy();
+    };
+  }, []);
+
+  return (
+    <div
+      ref={vantaRef}
+      className="absolute inset-0 z-0"
+    />
+  );
+}
 
 // Top-view F1 car SVG component
 function F1CarIcon() {
@@ -226,14 +265,9 @@ export default function App() {
 
       <main className="pt-20">
         {/* Hero Section */}
-        <section className="relative h-[70vh] flex items-center px-6 overflow-hidden">
-          <div
-            className="absolute inset-0 z-0 bg-cover bg-center"
-            style={{
-              backgroundImage: `linear-gradient(rgba(15, 23, 42, 0.6), rgba(15, 23, 42, 0.9)), url('https://images.unsplash.com/photo-1533106418989-88406c7cc8ca?q=80&w=2070&auto=format&fit=crop')`,
-            }}
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-background-dark via-transparent to-transparent z-0" />
+        <section className="relative h-[calc(100vh-80px)] flex items-center px-6 overflow-hidden">
+          <VantaBackground />
+          <div className="absolute inset-0 bg-gradient-to-r from-background-dark/80 via-background-dark/40 to-transparent z-0" />
 
           <div className="relative z-10 max-w-7xl mx-auto w-full">
             <motion.div
