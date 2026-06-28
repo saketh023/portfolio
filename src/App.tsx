@@ -263,7 +263,7 @@ export default function App() {
                 {item}
               </a>
             ))}
-            <button onClick={() => window.open("https://drive.google.com/file/d/10c63wYe1KxpzOn8Rw2UNhLQTnOa7kL0z/view?usp=sharing", "_blank")} className="bg-primary hover:bg-primary/90 text-white px-6 py-2 rounded font-bold uppercase tracking-widest text-sm transition-all shadow-lg shadow-primary/20">
+            <button onClick={() => window.open("https://drive.google.com/file/d/1y_P3Q4l-OhXv2-xsxCmPi-rsFs36cRXt/view?usp=sharing", "_blank")} className="bg-primary hover:bg-primary/90 text-white px-6 py-2 rounded font-bold uppercase tracking-widest text-sm transition-all shadow-lg shadow-primary/20">
               Resume
             </button>
           </nav>
