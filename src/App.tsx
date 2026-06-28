@@ -112,24 +112,31 @@ const experiences: Experience[] = [
   {
     id: "1",
     role: "Software Engineer Intern",
-    team: "NYC Administration for Children's Services",
-    period: "Jun 2025 - Aug 2025",
-    description: "Reduced WCAG violations by 90% for 1,000+ municipal employees. Improved API response times by 30% across 3 Spring Boot microservices using Redis caching. Shortened production release cycle by 40% with Docker-based containerization.",
+    team: "NYC Administration for Children's Services (NYC ACS)",
+    period: "June 2026 - Present",
+    description: "Sole engineer upgrading and securing Spring Boot microservices for two municipal child welfare platforms — the CEO app (federal Title IV-E funding eligibility) and the MHCU app (tracking psychiatrically hospitalized foster children). Migrated 4 services to Spring Boot v4.1, resolved 19 Veracode vulnerabilities cutting security exposure by 27%, and automated AWS deployments via Jenkins CI/CD reducing release cycles by 40%.",
     active: true
   },
   {
     id: "2",
-    role: "Graduate Research Assistant",
-    team: "Stony Brook University",
-    period: "Jan 2025 - May 2025",
-    description: "Eliminated SQL throughput bottlenecks for 720,000 geometries using GPU-accelerated spatial data pipelines (cuSpatial, cuDF). Achieved 600x performance gain in spatial proximity queries and cut preprocessing time by 50%."
+    role: "Software Engineer Intern",
+    team: "NYC Administration for Children's Services (NYC ACS)",
+    period: "June 2025 - August 2025",
+    description: "Built performance and AI features for the ICS app (supporting ACS specialists on high-risk abuse cases) and CCS21 app (extended foster care for youth 21+). Introduced Redis caching cutting API response times by 30%, integrated Claude API with RAG pipelines for natural language case record retrieval, and set up Datadog monitoring reducing incident detection time by 60%.",
   },
   {
     id: "3",
+    role: "Graduate Research Assistant",
+    team: "Stony Brook University",
+    period: "January 2025 - May 2025",
+    description: "Eliminated geospatial query bottlenecks by replacing serial SQL operations with GPU-accelerated Python pipelines using cuSpatial and cuDF, thereby cutting runtimes from hours to under a minute across 720K spatial records. Built automated ETL workflows for bulk IBM Db2 ingestion, reducing analyst preprocessing time by 50%.",
+  },
+  {
+    id: "4",
     role: "Software Engineer",
     team: "Fidelity National Information Services (FIS)",
-    period: "Feb 2022 - Jun 2024",
-    description: "Lowered payment processing errors by 30% for 100,000 daily transactions. Enabled real-time data synchronization across 5+ business units using JMS and Red Hat AMQ. Drove 80% reduction in production defect rate."
+    period: "February 2022 - June 2024",
+    description: "Built production banking APIs for an enterprise core banking platform covering payment processing, auto-debit scheduling, transaction reversals, statement generation, and US compliance (SCRA, MLA). Refactored a credit card payment service reducing errors by 30% across 1M+ daily transactions, designed a Kafka event pipeline across 6 microservices for AML reporting, and cut nightly batch runtime by 6 minutes across 100K+ accounts.",
   }
 ];
 
@@ -282,7 +289,7 @@ export default function App() {
                 </p>
                 <div className="h-px w-8 bg-primary/40" />
                 <span className="bg-primary/20 text-primary border border-primary/30 px-3 py-1 rounded text-[10px] font-black uppercase tracking-widest animate-pulse">
-                  Status: Actively Seeking Full-Time Roles (May 2026)
+                  Status: Actively Seeking Full-Time Roles
                 </span>
               </div>
               <h1 className="text-6xl md:text-8xl font-black uppercase tracking-tighter leading-none mb-6">
